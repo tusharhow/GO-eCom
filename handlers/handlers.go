@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+
 	"github.com/gorilla/mux"
 )
 
@@ -15,7 +16,7 @@ type Product struct {
 }
 
 var Products []Product
-
+// add product
 func AddProduct(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
@@ -26,14 +27,14 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 	d := json.NewEncoder(w).Encode(append(Products))
 	fmt.Println(d)
 }
-
+// get product
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(append(Products))
 }
-
+// get product by id
 func GetProductByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -46,6 +47,7 @@ func GetProductByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(&Product{})
 }
 
+// update product
 func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -62,6 +64,7 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(Products)
 }
 
+// delete product
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
@@ -74,16 +77,23 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(Products)
 }
 
+// total price
 func TotalPrice(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var totalPrice int
 	for _, item := range Products {
 		price, _ := strconv.Atoi(item.Price)
 		totalPrice += price
-	}
-	json.NewEncoder(w).Encode(totalPrice)
-}
+		if totalPrice != 0 {
+			w.Write([]byte("Total price is: " + strconv.Itoa(totalPrice)))
 
+		}
+		w.Write([]byte("Cart is empty\n"))
+
+	}
+
+}
+// add to cart
 func AddToCart(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	params := mux.Vars(r)
