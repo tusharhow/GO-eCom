@@ -7,8 +7,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+
+
 func main() {
 	r := mux.NewRouter()
+
 
 	r.HandleFunc("/addproduct", han.AddProduct).Methods("POST")
 	r.HandleFunc("/getproducts", han.GetProduct).Methods("GET")
@@ -17,7 +20,6 @@ func main() {
 	r.HandleFunc("/deleteproduct/{id}", han.DeleteProduct).Methods("DELETE")
 	r.HandleFunc("/totalprice", han.TotalPrice).Methods("GET")
 	r.HandleFunc("/addtocart/{id}", han.AddToCart).Methods("POST")
-
 
 	han.Products = append(han.Products, han.Product{ID: "1", Name: "Laptop", Price: "300"})
 	han.Products = append(han.Products, han.Product{ID: "2", Name: "Mobile", Price: "450"})

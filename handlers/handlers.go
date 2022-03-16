@@ -9,6 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+
 type Product struct {
 	ID    string `json:"id"`
 	Name  string `json:"name"`
@@ -16,6 +17,7 @@ type Product struct {
 }
 
 var Products []Product
+
 // add product
 func AddProduct(w http.ResponseWriter, r *http.Request) {
 
@@ -27,6 +29,7 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 	d := json.NewEncoder(w).Encode(append(Products))
 	fmt.Println(d)
 }
+
 // get product
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 
@@ -34,6 +37,7 @@ func GetProduct(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(append(Products))
 }
+
 // get product by id
 func GetProductByID(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -93,6 +97,7 @@ func TotalPrice(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
 // add to cart
 func AddToCart(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
