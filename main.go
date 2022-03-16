@@ -19,9 +19,9 @@ func main() {
 	r.HandleFunc("/addtocart/{id}", han.AddToCart).Methods("POST")
 
 
-	han.Products = append(han.Products, han.Product{ID: "1", Name: "Laptop", Price: "0"})
-	han.Products = append(han.Products, han.Product{ID: "2", Name: "Mobile", Price: "0"})
-	han.Products = append(han.Products, han.Product{ID: "3", Name: "TV", Price: "0"})
+	han.Products = append(han.Products, han.Product{ID: "1", Name: "Laptop", Price: "300"})
+	han.Products = append(han.Products, han.Product{ID: "2", Name: "Mobile", Price: "450"})
+	han.Products = append(han.Products, han.Product{ID: "3", Name: "TV", Price: "680"})
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
